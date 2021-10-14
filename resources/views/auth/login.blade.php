@@ -6,11 +6,9 @@
             <div class="w-full max-w-sm">
                 <div class="flex flex-col break-words bg-white border border-2 shadow-md mt-20">
                     <div class="bg-gray-300 text-gray-700 uppercase text-center py-3 px-6 mb-0">{{ __('Login') }}</div>
-
                     <div class="py-10 px-10">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-
                             <div class="">
                                 <label for="email" class="block text-gray-700 text-sm mb-2">{{ __('E-Mail Address') }}
                                 </label>
@@ -54,7 +52,7 @@
 
                             <div class="flex flex-wrap mb-6 mt-5">
                                 <button type="submit"
-                                        class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline">
+                                        class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
                                     {{ __('Login') }}
                                 </button>
 
