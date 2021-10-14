@@ -9,7 +9,7 @@
                         <div
                             class="bg-gray-300 text-gray-700 uppercase text-center py-3 px-6 mb-0">{{ __('Register') }}</div>
                         <div class="py-10 px-10">
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register') }}" novalidate>
                                 @csrf
 
                                 <div class="flex flex-wrap mt-5">
@@ -18,10 +18,12 @@
                                     <input id="name" type="text"
                                            class="p-2 bg-gray-300 rounded form-input w-full @error('name') is-invalid @enderror"
                                            name="name"
-                                           value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                           value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                     @error('name')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span
+                                        class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded"
+                                        role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
@@ -35,10 +37,12 @@
                                     <input id="email" type="email"
                                            class="p-2 bg-gray-300 rounded form-input w-full @error('email') is-invalid @enderror"
                                            name="email"
-                                           value="{{ old('email') }}" required autocomplete="email">
+                                           value="{{ old('email') }}" autocomplete="email">
 
                                     @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span
+                                        class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded"
+                                        role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
@@ -52,10 +56,10 @@
                                     <input id="password" type="password"
                                            class="p-2 bg-gray-300 rounded form-input w-full @error('password') is-invalid @enderror"
                                            name="password"
-                                           required autocomplete="new-password">
+                                           autocomplete="new-password">
 
                                     @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
@@ -66,10 +70,10 @@
                                            class="block text-gray-700 text-sm mb-2">{{ __('Confirm Password') }}</label>
                                     <input id="password-confirm" type="password"
                                            class="p-2 bg-gray-300 rounded form-input w-full"
-                                           name="password_confirmation" required autocomplete="new-password">
+                                           name="password_confirmation"  autocomplete="new-password">
                                 </div>
 
-                                <div class="flex flex-wrap mb-6 mt-5">
+                                <div class="flex flex-wrap mt-10">
                                     <button type="submit"
                                             class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
                                         {{ __('Register') }}
