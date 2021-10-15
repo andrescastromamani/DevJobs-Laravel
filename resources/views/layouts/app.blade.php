@@ -22,7 +22,7 @@
 <body class="bg-gray-200 min-h-screen leading-none">
 <div id="app">
     <nav class="shadow-md bg-gray-800 py-2">
-        <div class="container mx-auto md:px-0 max-w-screen-md">
+        <div class="container mx-auto md:px-0 max-w-screen-xl">
             <div class="flex items-center justify-around">
                 <a class="text-white" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
