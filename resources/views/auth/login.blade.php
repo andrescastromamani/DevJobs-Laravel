@@ -54,7 +54,7 @@
                                 </label>
                             </div>
 
-                            <div class="flex flex-wrap mb-6 mt-5">
+                            <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"
                                         class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
                                     {{ __('Login') }}

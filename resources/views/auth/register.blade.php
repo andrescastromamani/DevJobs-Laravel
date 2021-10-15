@@ -73,7 +73,7 @@
                                            name="password_confirmation"  autocomplete="new-password">
                                 </div>
 
-                                <div class="flex flex-wrap mt-10">
+                                <div class="flex flex-wrap mt-8 mb-5">
                                     <button type="submit"
                                             class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
                                         {{ __('Register') }}
