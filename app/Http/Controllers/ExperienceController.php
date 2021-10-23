@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Experience;
-use App\Models\Location;
-use App\Models\Salary;
-use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
-class VacancyController extends Controller
+class ExperienceController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +14,7 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        return view('vacancies.index');
+        //
     }
 
     /**
@@ -33,17 +24,13 @@ class VacancyController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $experiences = Experience::all();
-        $locations = Location::all();
-        $salaries = Salary::all();
-        return view('vacancies.create', compact('categories', 'experiences', 'locations', 'salaries'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,10 +41,10 @@ class VacancyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Vacancy $vacancy
+     * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function show(Vacancy $vacancy)
+    public function show(Experience $experience)
     {
         //
     }
@@ -65,10 +52,10 @@ class VacancyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Vacancy $vacancy
+     * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function edit(Vacancy $vacancy)
+    public function edit(Experience $experience)
     {
         //
     }
@@ -76,11 +63,11 @@ class VacancyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Vacancy $vacancy
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Vacancy $vacancy)
+    public function update(Request $request, Experience $experience)
     {
         //
     }
@@ -88,10 +75,10 @@ class VacancyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Vacancy $vacancy
+     * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vacancy $vacancy)
+    public function destroy(Experience $experience)
     {
         //
     }
