@@ -1,4 +1,9 @@
 @extends('layouts.app')
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/medium-editor.css"
+          integrity="sha512-iWJx03fFJWrXXXI6ctpoVaLkB6a4yf9EHNURLEEsLxGyup43eF6LrD3FSPdt1FKnGSE8Zp7JZYEDbATHf1Yx8Q=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+@endsection
 @section('navegation')
     @include('ui.adminnav')
 @endsection
@@ -6,7 +11,7 @@
     <div class="container mx-auto">
         <div class="flex flex-wrap justify-center">
             <div class="w-full max-w-xl ">
-                <div class="flex flex-col break-words bg-white border border-2 shadow-md mt-10">
+                <div class="flex flex-col break-words bg-white border border-2 shadow-md mt-5">
                     <h1 class="text-center mt-5">Nueva vacante</h1>
                     <div class="py-10 px-10">
                         <form method="POST" novalidate>
@@ -93,6 +98,13 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="flex flex-wrap mt-5">
+                                <label for="description" class="block text-gray-700 text-sm mb-2">Descripcion del
+                                    Puesto</label>
+                                <div class="editable">
+
+                                </div>
+                            </div>
                             <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"
                                         class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
@@ -105,4 +117,16 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/js/medium-editor.js"
+            integrity="sha512-aCPwYkaP9S5CeLKGxJDPs1soJuQd+Dza60RzTsXRDzexppY0U25fSyCuPlOo8HH9kIuVS6uSunEMI4OG96+4gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = new MediumEditor('.editable');
+            console.log('ejecuconsa')
+        })
+
+    </script>
 @endsection
