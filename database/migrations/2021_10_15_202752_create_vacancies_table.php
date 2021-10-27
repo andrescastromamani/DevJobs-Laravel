@@ -35,6 +35,7 @@ class CreateVacanciesTable extends Migration
         });
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
+            $table->text('description');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('experience_id');
             $table->unsignedBigInteger('location_id');

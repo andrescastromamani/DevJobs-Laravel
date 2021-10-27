@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/medium-editor.css"
-          integrity="sha512-iWJx03fFJWrXXXI6ctpoVaLkB6a4yf9EHNURLEEsLxGyup43eF6LrD3FSPdt1FKnGSE8Zp7JZYEDbATHf1Yx8Q=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+          type="text/css" media="screen" charset="utf-8">
 @endsection
 @section('navegation')
     @include('ui.adminnav')
@@ -98,12 +97,11 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="flex flex-wrap mt-5">
+                            <div class="mt-5">
                                 <label for="description" class="block text-gray-700 text-sm mb-2">Descripcion del
                                     Puesto</label>
-                                <div class="editable">
-
-                                </div>
+                                <div class="editable p-3 bg-gray-100 rounded form-input w-full text-gray-700"></div>
+                                <input type="hidden" name="description" id="description">
                             </div>
                             <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"
@@ -119,14 +117,23 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/js/medium-editor.js"
-            integrity="sha512-aCPwYkaP9S5CeLKGxJDPs1soJuQd+Dza60RzTsXRDzexppY0U25fSyCuPlOo8HH9kIuVS6uSunEMI4OG96+4gg=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const editor = new MediumEditor('.editable');
-            console.log('ejecuconsa')
+            const editor = new MediumEditor('.editable', {
+                toolbar: {
+                    buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+                    sticky: true,
+                    static: true
+                },
+                placeholder: {
+                    text: 'Mas informacion...'
+                }
+            });
+            editor.subscribe('editableInput', function (eventObj, editable) {
+                const content = editor.getContent();
+                document.querySelector('#description').value = content;
+            })
         })
-
     </script>
 @endsection
