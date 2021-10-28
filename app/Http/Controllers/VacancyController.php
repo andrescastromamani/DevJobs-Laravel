@@ -95,4 +95,10 @@ class VacancyController extends Controller
     {
         //
     }
+
+    public function image(Request $request)
+    {
+        $image = $request->file('file');
+        return $image->extension();
+    }
 }
