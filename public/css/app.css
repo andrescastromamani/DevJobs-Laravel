@@ -31941,6 +31941,18 @@ video {
   line-height: 2;
 }
 
+.dropzone {
+  border: 2px dashed #C1C1C1;
+}
+
+.dropzone .dz-error {
+  display: none;
+}
+
+.dropzone .dz-message .dz-button {
+  color: #4a5568;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

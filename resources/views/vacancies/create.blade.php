@@ -2,6 +2,7 @@
 @section('styles')
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
           type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
 @endsection
 @section('navegation')
     @include('ui.adminnav')
@@ -103,6 +104,11 @@
                                 <div class="editable p-3 bg-gray-100 rounded form-input w-full text-gray-700"></div>
                                 <input type="hidden" name="description" id="description">
                             </div>
+                            <div class="mt-5">
+                                <label for="dropzoneDevJobs" class="block text-gray-700 text-sm mb-2">Imagen
+                                    Vacante</label>
+                                <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
+                            </div>
                             <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"
                                         class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
@@ -118,8 +124,13 @@
 @endsection
 @section('scripts')
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
+        window.Dropzone.autoDiscover = false;
+
         document.addEventListener('DOMContentLoaded', () => {
+
+            //Medium Editor
             const editor = new MediumEditor('.editable', {
                 toolbar: {
                     buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
@@ -133,6 +144,11 @@
             editor.subscribe('editableInput', function (eventObj, editable) {
                 const content = editor.getContent();
                 document.querySelector('#description').value = content;
+            })
+
+            //Dropzone
+            const dropzone = new Dropzone('#dropzoneDevJobs',{
+                url: "/vacantes/imagen"
             })
         })
     </script>
