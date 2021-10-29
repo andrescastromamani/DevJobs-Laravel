@@ -108,6 +108,7 @@
                                 <label for="dropzoneDevJobs" class="block text-gray-700 text-sm mb-2">Imagen
                                     Vacante</label>
                                 <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
+                                <input type="hidden" name="image" id="image">
                                 <p id="errorImage"></p>
                             </div>
                             <div class="flex flex-wrap mb-5 mt-5">
@@ -161,6 +162,8 @@
                 success: (file, response) => {
                     console.log(response)
                     document.querySelector('#errorImage').textContent = ''
+
+                    document.querySelector('#image').value = response.correct;
                 },
                 error: (file, response) => {
                     console.log('Hay un error')

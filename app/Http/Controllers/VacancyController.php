@@ -99,6 +99,8 @@ class VacancyController extends Controller
     public function image(Request $request)
     {
         $image = $request->file('file');
-        return $image->extension();
+        $nameImage = time() . '.' . $image->extension();
+        $image->move(public_path('storage/vacancies'), $nameImage);
+        return response()->json(['correct' => $nameImage]);
     }
 }
