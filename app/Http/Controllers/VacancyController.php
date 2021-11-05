@@ -7,7 +7,9 @@ use App\Models\Experience;
 use App\Models\Location;
 use App\Models\Salary;
 use App\Models\Vacancy;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class VacancyController extends Controller
 {
@@ -102,5 +104,16 @@ class VacancyController extends Controller
         $nameImage = time() . '.' . $image->extension();
         $image->move(public_path('storage/vacancies'), $nameImage);
         return response()->json(['correct' => $nameImage]);
+    }
+
+    public function deleteImage(Request $request)
+    {
+        if ($request->ajax()) {
+            $image = $request->get('image');
+            if (File::exists('storage/vacancies/' . $image)) {
+                File::delete('storage/vacancies/' . $image);
+            }
+            return response('imagen eliminada', 200);
+        }
     }
 }

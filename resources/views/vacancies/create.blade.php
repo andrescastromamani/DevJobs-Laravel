@@ -119,30 +119,28 @@
                 addRemoveLinks: true,
                 dictRemoveFile: 'Borrar Archivo',
                 maxFiles: 1,
-                dictMaxFilesExceeded: "You can not upload any more files.",
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
                 success: function (file, response) {
                     console.log(response)
                     document.querySelector('#errorImage').textContent = ''
-
                     document.querySelector('#image').value = response.correct;
-                },
-                error: function (file, response) {
-                    console.log('Hay un error')
-                    document.querySelector('#errorImage').textContent = 'Formato no valido'
+                    file.nameServer = response.correct;
                 },
                 maxfilesexceeded: function (file) {
-                    console.log("Muchos Archivos")
-                    console.log(this.files)
                     if (this.files[1] != null) {
                         this.removeFile(this.files[0]);
                         this.addFile(file);
                     }
                 },
                 removedfile: function (file, response) {
+                    file.previewElement.parentNode.removeChild(file.previewElement);
                     console.log('El archivo borrado fue: ', file)
+                    params = {
+                        image: file.nameServer
+                    }
+                    axios.post('/vacantes/borrarimagen', params).then(response => console.log(response))
                 }
             })
         })
