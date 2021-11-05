@@ -22,13 +22,6 @@
                                        class="p-2 bg-gray-300 rounded form-input w-full @error('email') is-invalid @enderror"
                                        name="title"
                                        value="{{ old('email') }}" autocomplete="email" autofocus>
-                                @error('title')
-                                <span
-                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1 mt-2 w-full text-sm rounded"
-                                    role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="flex flex-wrap mt-5">
                                 <label for="category" class="block text-gray-700 text-sm mb-2">Categoria</label>
@@ -39,13 +32,6 @@
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
-                                @error('category')
-                                <span
-                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1 mt-2 w-full text-sm rounded"
-                                    role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="flex flex-wrap mt-5">
                                 <label for="experience" class="block text-gray-700 text-sm mb-2">Experiencia</label>
@@ -56,13 +42,6 @@
                                         <option value="{{$experience->id}}">{{$experience->title}}</option>
                                     @endforeach
                                 </select>
-                                @error('experience')
-                                <span
-                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1 mt-2 w-full text-sm rounded"
-                                    role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="flex flex-wrap mt-5">
                                 <label for="location" class="block text-gray-700 text-sm mb-2">Ubicacion</label>
@@ -73,13 +52,6 @@
                                         <option value="{{$location->id}}">{{$location->title}}</option>
                                     @endforeach
                                 </select>
-                                @error('location')
-                                <span
-                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1 mt-2 w-full text-sm rounded"
-                                    role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="flex flex-wrap mt-5">
                                 <label for="salary" class="block text-gray-700 text-sm mb-2">Salario</label>
@@ -90,13 +62,6 @@
                                         <option value="{{$salary->id}}">{{$salary->title}}</option>
                                     @endforeach
                                 </select>
-                                @error('salary')
-                                <span
-                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1 mt-2 w-full text-sm rounded"
-                                    role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="mt-5">
                                 <label for="description" class="block text-gray-700 text-sm mb-2">Descripcion del
@@ -128,10 +93,8 @@
     <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script>
-        window.Dropzone.autoDiscover = false;
-
+        Dropzone.autoDiscover = false;
         document.addEventListener('DOMContentLoaded', () => {
-
             //Medium Editor
             const editor = new MediumEditor('.editable', {
                 toolbar: {
@@ -156,28 +119,30 @@
                 addRemoveLinks: true,
                 dictRemoveFile: 'Borrar Archivo',
                 maxFiles: 1,
+                dictMaxFilesExceeded: "You can not upload any more files.",
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
-                success: (file, response) => {
+                success: function (file, response) {
                     console.log(response)
                     document.querySelector('#errorImage').textContent = ''
 
                     document.querySelector('#image').value = response.correct;
                 },
-                error: (file, response) => {
+                error: function (file, response) {
                     console.log('Hay un error')
                     document.querySelector('#errorImage').textContent = 'Formato no valido'
                 },
-                maxfilesexceeded: (file) => {
+                maxfilesexceeded: function (file) {
+                    console.log("Muchos Archivos")
                     console.log(this.files)
                     if (this.files[1] != null) {
                         this.removeFile(this.files[0]);
                         this.addFile(file);
                     }
                 },
-                removeFile: (file, response) => {
-                    console.log('El archivo borrado fue', file)
+                removedfile: function (file, response) {
+                    console.log('El archivo borrado fue: ', file)
                 }
             })
         })
