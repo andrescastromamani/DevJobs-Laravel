@@ -76,6 +76,16 @@
                                 <input type="hidden" name="image" id="image">
                                 <p id="errorImage"></p>
                             </div>
+                            <div class="mt-5">
+                                <label for="skills" class="block text-gray-700 text-sm mb-2">Habilidades y
+                                    Conocimientos</label>
+                                @php
+                                    $skills = ['html5', 'css','Javascript', 'React','Angular','Vue','php','Java','Laravel','Spring']
+                                @endphp
+                                <skills-list :skills="{{json_encode($skills)}}">
+
+                                </skills-list>
+                            </div>
                             <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"
                                         class="bg-green-500 w-full hover:bg-green-700 text-gray-100 p-3 focus:outline-none focus:shadow-outline rounded">
