@@ -50,7 +50,15 @@ class VacancyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'title' => 'required|min:6',
+            'category' => 'required',
+            'experience' => 'required',
+            'location' => 'required',
+            'salary' => 'required',
+            'description' => 'required|min:50',
+        ]);
+        return 'desde store';
     }
 
     /**
