@@ -110,7 +110,8 @@
                             <div class="mt-5">
                                 <label for="description" class="block text-gray-700 text-sm mb-2">Descripcion del
                                     Puesto</label>
-                                <div class="editable p-3 bg-gray-100 rounded form-input w-full text-gray-700"></div>
+                                <div
+                                    class="editable p-3 bg-gray-100 rounded form-input w-full text-gray-700 mb-3"></div>
                                 <input type="hidden" name="description" id="description" value="{{old('description')}}">
                                 @error('description')
                                 <span
@@ -123,9 +124,15 @@
                             <div class="mt-5">
                                 <label for="dropzoneDevJobs" class="block text-gray-700 text-sm mb-2">Imagen
                                     Vacante</label>
-                                <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100"></div>
-                                <input type="hidden" name="image" id="image">
-                                <p id="errorImage"></p>
+                                <div id="dropzoneDevJobs" class="dropzone rounded bg-gray-100 mb-3"></div>
+                                <input type="hidden" name="image" id="image" value="{{old('image')}}">
+                                @error('image')
+                                <span
+                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded"
+                                    role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="mt-5">
                                 <label for="skills" class="block text-gray-700 text-sm mb-2">Habilidades y
@@ -184,9 +191,20 @@
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
+                init: function () {
+                    if (document.querySelector('#image').value.trim()) {
+                        let publicImage = {};
+                        publicImage.size = 1234;
+                        publicImage.name = document.querySelector('#image').value;
+                        this.options.addedfile.call(this, publicImage);
+                        this.options.thumbnail.call(this, publicImage, `/storage/vacancies/${publicImage.name}`);
+                        publicImage.previewElement.classList.add('dz-success');
+                        publicImage.previewElement.classList.add('dz-complete');
+                    }
+                },
                 success: function (file, response) {
-                    console.log(response)
-                    document.querySelector('#errorImage').textContent = ''
+                    console.log(response);
+                    //document.querySelector('#errorImage').textContent = '';
                     document.querySelector('#image').value = response.correct;
                     file.nameServer = response.correct;
                 },
@@ -200,7 +218,7 @@
                     file.previewElement.parentNode.removeChild(file.previewElement);
                     console.log('El archivo borrado fue: ', file)
                     params = {
-                        image: file.nameServer
+                        image: file.nameServer ?? document.querySelector('#image').value
                     }
                     axios.post('/vacantes/borrarimagen', params).then(response => console.log(response))
                 }

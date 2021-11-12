@@ -57,6 +57,8 @@ class VacancyController extends Controller
             'location' => 'required',
             'salary' => 'required',
             'description' => 'required|min:50',
+            'image' => 'required',
+
         ]);
         return 'desde store';
     }
