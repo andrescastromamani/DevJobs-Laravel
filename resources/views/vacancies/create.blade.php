@@ -140,9 +140,14 @@
                                 @php
                                     $skills = ['html5', 'css','Javascript', 'React','Angular','Vue','php','Java','Laravel','Spring']
                                 @endphp
-                                <skills-list :skills="{{json_encode($skills)}}">
-
-                                </skills-list>
+                                <skills-list :skills="{{json_encode($skills)}}" :oldskills="{{json_encode(old('skills'))}}"></skills-list>
+                                @error('skills')
+                                <span
+                                    class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded"
+                                    role="alert">
+                                        <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="flex flex-wrap mb-5 mt-5">
                                 <button type="submit"

@@ -2088,14 +2088,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['skills'],
-  mounted: function mounted() {//console.log(this.skills)
-  },
+  props: ['skills', 'oldskills'],
   data: function data() {
     return {
       skillss: new Set()
     };
+  },
+  created: function created() {
+    var _this = this;
+
+    if (this.oldskills) {
+      var skillsArray = this.oldskills.split(',');
+      skillsArray.forEach(function (skill) {
+        return _this.skillss.add(skill);
+      });
+    }
+  },
+  mounted: function mounted() {
+    document.querySelector('#skills').value = this.oldskills;
   },
   methods: {
     active: function active(e) {
@@ -2110,6 +2122,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var stringSkills = _toConsumableArray(this.skillss);
 
       document.querySelector('#skills').value = stringSkills;
+    },
+    verifyClassActive: function verifyClassActive(skill) {
+      return this.skillss.has(skill) ? 'bg-green-500' : '';
     }
   }
 });
@@ -37678,6 +37693,7 @@ var render = function() {
           {
             key: i,
             staticClass: "border border-gray-500 p-3 m-2 rounded",
+            class: _vm.verifyClassActive(skill),
             on: {
               click: function($event) {
                 return _vm.active($event)

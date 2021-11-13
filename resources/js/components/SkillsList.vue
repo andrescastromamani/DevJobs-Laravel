@@ -2,6 +2,7 @@
     <div>
         <ul class="flex flex-wrap justify-center">
             <li class="border border-gray-500 p-3 m-2 rounded"
+                :class="verifyClassActive(skill)"
                 v-for="(skill, i) in this.skills"
                 v-bind:key="i"
                 @click="active($event)">{{ skill }}</li>
@@ -11,14 +12,20 @@
 </template>
 <script>
 export default {
-    props: ['skills'],
-    mounted() {
-        //console.log(this.skills)
-    },
+    props: ['skills', 'oldskills'],
     data: function () {
         return {
             skillss: new Set()
         }
+    },
+    created: function () {
+        if (this.oldskills) {
+            const skillsArray = this.oldskills.split(',');
+            skillsArray.forEach(skill => this.skillss.add(skill));
+        }
+    },
+    mounted: function () {
+        document.querySelector('#skills').value = this.oldskills;
     },
     methods: {
         active(e) {
@@ -31,6 +38,9 @@ export default {
             }
             const stringSkills = [...this.skillss];
             document.querySelector('#skills').value = stringSkills;
+        },
+        verifyClassActive(skill) {
+            return this.skillss.has(skill) ? 'bg-green-500' : '';
         }
     }
 }
