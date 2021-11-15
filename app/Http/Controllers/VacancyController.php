@@ -25,7 +25,8 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        return view('vacancies.index');
+        $vacancies = Vacancy::where('user_id', auth()->user()->id)->paginate(10);
+        return view('vacancies.index', compact('vacancies'));
     }
 
     /**
@@ -61,7 +62,18 @@ class VacancyController extends Controller
             'skills' => 'required'
 
         ]);
-        return 'desde store';
+        //save in the db
+        auth()->user()->vacancies()->create([
+            'title' => $validation['title'],
+            'category_id' => $validation['category'],
+            'experience_id' => $validation['experience'],
+            'location_id' => $validation['location'],
+            'salary_id' => $validation['salary'],
+            'description' => $validation['description'],
+            'skills' => $validation['skills'],
+            'image' => $validation['image']
+        ]);
+        return redirect()->route('vacancies.index');
     }
 
     /**

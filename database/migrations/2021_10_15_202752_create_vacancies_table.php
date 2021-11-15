@@ -35,11 +35,17 @@ class CreateVacanciesTable extends Migration
         });
         Schema::create('vacancies', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->text('description');
+            $table->text('skills');
+            $table->string('image');
+            $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('experience_id');
             $table->unsignedBigInteger('location_id');
             $table->unsignedBigInteger('salary_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('experience_id')->references('id')->on('experiences');
             $table->foreign('location_id')->references('id')->on('locations');

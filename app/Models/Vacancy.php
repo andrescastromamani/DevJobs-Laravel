@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Vacancy extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'skills',
+        'image',
+        'category_id',
+        'experience_id',
+        'location_id',
+        'salary_id',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
