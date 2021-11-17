@@ -8,8 +8,10 @@
     <h1 class="text-center mt-5 text-3xl">{{ $vacancy->title }}</h1>
     <div class="mt-5 mb-5 md:flex  justify-center">
         <div class="md:w-3/5">
-            <p class="block text-gray-700 font-bold my-1">Publicado: <span
-                    class="font-normal">{{$vacancy->created_at}}</span></p>
+            <p class="block text-gray-700 font-bold my-1">Publicado:
+                <span class="font-normal">{{$vacancy->created_at}}</span>
+                <span class="font-normal">por: {{$vacancy->user->name}}</span>
+            </p>
             <p class="block text-gray-700 font-bold my-1">Categoria: <span
                     class="font-normal">{{$vacancy->category->name}}</span></p>
             <p class="block text-gray-700 font-bold my-1">Salario: <span
