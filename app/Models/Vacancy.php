@@ -24,4 +24,19 @@ class Vacancy extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function salary()
+    {
+        return $this->belongsTo(Salary::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
+    public function experience()
+    {
+        return $this->belongsTo(Experience::class);
+    }
 }
