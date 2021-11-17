@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css"
+          integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+@endsection
 @section('content')
     <h1 class="text-center mt-5 text-3xl">{{ $vacancy->title }}</h1>
     <div class="mt-5 mb-5 md:flex  justify-center">
@@ -21,6 +25,9 @@
             @foreach($skills as $skill)
                 <p class="inline-block  bg-gray-300 border m-2 rounded p-3  mt-5">{{$skill}}</p>
             @endforeach
+            <a href="/storage/vacancies/{{$vacancy->image}}" data-lightbox="image">
+                <img src="/storage/vacancies/{{$vacancy->image}}" class="w-40 mt-5">
+            </a>
             <div class="mt-5">
                 {!! $vacancy->description !!}
             </div>
