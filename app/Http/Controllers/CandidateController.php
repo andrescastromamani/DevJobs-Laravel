@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -30,21 +31,39 @@ class CandidateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'cv' => 'required|mimes:pdf',
+            'vacancy_id' => 'required'
+        ]);
+        if ($request->file('cv')) {
+            $file = $request->file('cv');
+            $fileName = time() . '.' . $request->file('cv')->extension();
+            $file->move(public_path('/storage/cv'), $fileName);
+        }
+        $vacancy = Vacancy::find($data['vacancy_id']);
+        $vacancy->candidates()->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'cv' => $fileName
+        ]);
+        return back()->with('success', 'Candidate added successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Candidate  $candidate
+     * @param \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
-    public function show(Candidate $candidate)
+    public
+    function show(Candidate $candidate)
     {
         //
     }
@@ -52,10 +71,11 @@ class CandidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Candidate  $candidate
+     * @param \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Candidate $candidate)
+    public
+    function edit(Candidate $candidate)
     {
         //
     }
@@ -63,11 +83,12 @@ class CandidateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Candidate  $candidate
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Candidate $candidate)
+    public
+    function update(Request $request, Candidate $candidate)
     {
         //
     }
@@ -75,10 +96,11 @@ class CandidateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Candidate  $candidate
+     * @param \App\Models\Candidate $candidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidate $candidate)
+    public
+    function destroy(Candidate $candidate)
     {
         //
     }

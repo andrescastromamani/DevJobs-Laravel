@@ -1,6 +1,12 @@
 <aside class="md:w-2/5 bg-green-500 p-3 rounded m-3">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <h2 class="text-center ">Contacta al Reclutador</h2>
-    <form>
+    <form action="{{route('candidates.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="flex flex-wrap mt-5">
             <label for="name"
                    class="block text-gray-700 text-sm mb-2">Nombre</label>
@@ -31,9 +37,8 @@
             <label for="cv"
                    class="block text-gray-700 text-sm mb-2">Curriculum (PDF)</label>
             <input id="cv" type="file"
-                   class="p-2 bg-gray-300 rounded form-input w-full @error('name') is-invalid @enderror"
-                   name="cv"
-                   value="{{ old('cv') }}" autocomplete="cv" autofocus>
+                   class="p-2 bg-gray-300 rounded form-input w-full @error('cv') is-invalid @enderror"
+                   name="cv">
             @error('cv')
             <span
                 class="bg-red-100 border-l-4 border-red-500 text-red-700 p-1  mt-2 w-full text-sm rounded"

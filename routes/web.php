@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\CandidateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/vacantes/imagen', [VacancyController::class, 'image'])->name('vacancies.image');
     Route::post('/vacantes/borrarimagen', [VacancyController::class, 'deleteImage'])->name('vacancies.deleteImage');
 });
+Route::post('/candidatos', [CandidateController::class, 'store'])->name('candidates.store');
 Route::get('/vacantes/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');
