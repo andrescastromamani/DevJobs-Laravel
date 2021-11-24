@@ -20,7 +20,7 @@ class VacancyController extends Controller
      */
     public function index()
     {
-        $vacancies = Vacancy::where('user_id', auth()->user()->id)->paginate(10);
+        $vacancies = Vacancy::where('user_id', auth()->user()->id)->paginate(6);
         return view('vacancies.index', compact('vacancies'));
     }
 
