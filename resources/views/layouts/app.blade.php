@@ -39,11 +39,12 @@
                            href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
+                    <a href="#" class="bg-gray-500 rounded-full text-center px-1 mx-2">{{\Illuminate\Support\Facades\Auth::user()->unreadNotifications->count()}}</a>
                     <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="no-underline text-gray-300 text-sm" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                           document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -29,7 +29,7 @@ class NewVacancy extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -45,6 +45,13 @@ class NewVacancy extends Notification
             ->line('New candidate in the vacancy : ' . $this->vacancy)
             ->action('Go to the Page', url('/'))
             ->line('Thank you for using our application!');
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'vacancy' => $this->vacancy
+        ];
     }
 
     /**
