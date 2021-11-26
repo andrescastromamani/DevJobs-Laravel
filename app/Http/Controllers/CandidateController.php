@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Candidate;
 use App\Models\Vacancy;
+use App\Notifications\NewVacancy;
 use Illuminate\Http\Request;
 
 class CandidateController extends Controller
@@ -53,6 +54,8 @@ class CandidateController extends Controller
             'email' => $data['email'],
             'cv' => $fileName
         ]);
+        $recruiter = $vacancy->user;
+        $recruiter->notify(new NewVacancy($vacancy->title));
         return back()->with('success', 'Candidate added successfully');
     }
 
