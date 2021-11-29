@@ -54,8 +54,7 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                        <div class="text-sm text-gray-500">Optimization</div>
+                                        <div class="text-sm text-gray-500"><a href="{{route('candidates.index',$vacancy->id)}}">{{$vacancy->candidates->count()}} Candidatos</a></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span
@@ -67,7 +66,8 @@
                                     <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="#" class="text-yellow-500 hover:text-indigo-900 mx-2">Editar</a>
                                         <a href="#" class="text-red-500 hover:text-indigo-900 mx-2">Eliminar</a>
-                                        <a href="{{route('vacancies.show',$vacancy->id)}}" class="text-green-500 hover:text-indigo-900 mx-2">Ver</a>
+                                        <a href="{{route('vacancies.show',$vacancy->id)}}"
+                                           class="text-green-500 hover:text-indigo-900 mx-2">Ver</a>
                                     </td>
                                 </tr>
                             @endforeach

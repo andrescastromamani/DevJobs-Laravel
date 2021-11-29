@@ -14,9 +14,12 @@ class CandidateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $id_vacancy = $request->route('id');
+        $candidates = Candidate::all();
+        $vacancy = Vacancy::findOrFail($id_vacancy);
+        return view('candidates.index', compact('vacancy'));
     }
 
     /**
@@ -55,7 +58,7 @@ class CandidateController extends Controller
             'cv' => $fileName
         ]);
         $recruiter = $vacancy->user;
-        $recruiter->notify(new NewVacancy($vacancy->title));
+        $recruiter->notify(new NewVacancy($vacancy->title, $vacancy->id));
         return back()->with('success', 'Candidate added successfully');
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('/vacantes/imagen', [VacancyController::class, 'image'])->name('vacancies.image');
     Route::post('/vacantes/borrarimagen', [VacancyController::class, 'deleteImage'])->name('vacancies.deleteImage');
+
+    //Notification
+    Route::get('/notificaciones', NotificationController::class)->name('notifications');
 });
+Route::get('/candidatos/{id}', [CandidateController::class, 'index'])->name('candidates.index');
 Route::post('/candidatos', [CandidateController::class, 'store'])->name('candidates.store');
 Route::get('/vacantes/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');
