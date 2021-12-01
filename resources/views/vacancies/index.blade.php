@@ -54,11 +54,13 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500"><a href="{{route('candidates.index',$vacancy->id)}}">{{$vacancy->candidates->count()}} Candidatos</a></div>
+                                        <div class="text-sm text-gray-500"><a
+                                                href="{{route('candidates.index',$vacancy->id)}}">{{$vacancy->candidates->count()}}
+                                                Candidatos</a></div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{$vacancy->is_active?'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}">{{$vacancy->is_active ? 'Activa':'Inactiva'}}</span>
+                                        <vacancy-state state="{{$vacancy->is_active}}"
+                                                       idvacancy="{{$vacancy->id}}"></vacancy-state>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         Admin

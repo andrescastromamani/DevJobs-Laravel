@@ -7,7 +7,6 @@ use App\Models\Experience;
 use App\Models\Location;
 use App\Models\Salary;
 use App\Models\Vacancy;
-use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -133,5 +132,13 @@ class VacancyController extends Controller
             }
             return response('imagen eliminada', 200);
         }
+    }
+
+    public function state(Request $request, Vacancy $vacancy)
+    {
+        //return response()->json($request->status);
+        $vacancy->is_active = $request->status;
+        $vacancy->save();
+        return response()->json(['correct' => 'ok']);
     }
 }

@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/vacantes/imagen', [VacancyController::class, 'image'])->name('vacancies.image');
     Route::post('/vacantes/borrarimagen', [VacancyController::class, 'deleteImage'])->name('vacancies.deleteImage');
 
+    Route::post('/vacantes/{vacancy}', [VacancyController::class, 'state'])->name('vacancies.state');
+
     //Notification
     Route::get('/notificaciones', NotificationController::class)->name('notifications');
 });
