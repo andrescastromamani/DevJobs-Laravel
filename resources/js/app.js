@@ -6,6 +6,9 @@
 
 require('./bootstrap');
 require('lightbox2');
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 window.Vue = require('vue').default;
 
@@ -20,8 +23,10 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.use(VueSweetalert2);
 Vue.component('skills-list', require('./components/SkillsList.vue').default);
 Vue.component('vacancy-state', require('./components/VacancyState.vue').default);
+Vue.component('vacancy-delete', require('./components/VacancyDelete.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
