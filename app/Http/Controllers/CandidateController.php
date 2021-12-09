@@ -19,6 +19,7 @@ class CandidateController extends Controller
         $id_vacancy = $request->route('id');
         $candidates = Candidate::all();
         $vacancy = Vacancy::findOrFail($id_vacancy);
+        $this->authorize('view', $vacancy);
         return view('candidates.index', compact('vacancy'));
     }
 

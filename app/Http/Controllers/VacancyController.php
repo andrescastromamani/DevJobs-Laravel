@@ -89,7 +89,12 @@ class VacancyController extends Controller
      */
     public function edit(Vacancy $vacancy)
     {
-        //
+        $this->authorize('view', $vacancy);
+        $categories = Category::all();
+        $experiences = Experience::all();
+        $locations = Location::all();
+        $salaries = Salary::all();
+        return view('vacancies.edit', compact('categories', 'experiences', 'locations', 'salaries', 'vacancy'));
     }
 
     /**
@@ -101,7 +106,31 @@ class VacancyController extends Controller
      */
     public function update(Request $request, Vacancy $vacancy)
     {
-        //
+        $this->authorize('update', $vacancy);
+
+        $validation = $request->validate([
+            'title' => 'required|min:6',
+            'category' => 'required',
+            'experience' => 'required',
+            'location' => 'required',
+            'salary' => 'required',
+            'description' => 'required|min:50',
+            'image' => 'required',
+            'skills' => 'required'
+
+        ]);
+        //save in the db
+        $vacancy->update([
+            'title' => $validation['title'],
+            'category_id' => $validation['category'],
+            'experience_id' => $validation['experience'],
+            'location_id' => $validation['location'],
+            'salary_id' => $validation['salary'],
+            'description' => $validation['description'],
+            'skills' => $validation['skills'],
+            'image' => $validation['image']
+        ]);
+        return redirect()->route('vacancies.index');
     }
 
     /**
@@ -113,6 +142,8 @@ class VacancyController extends Controller
     public function destroy(Vacancy $vacancy, Request $request)
     {
         //return response()->json($request->all());
+        $this->authorize('delete', $vacancy);
+
         $vacancy->delete();
         return response()->json(['success' => 'Vacancte eliminada con exito: ' . $vacancy->title]);
     }

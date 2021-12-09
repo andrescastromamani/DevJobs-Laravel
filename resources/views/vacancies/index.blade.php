@@ -66,7 +66,8 @@
                                         Admin
                                     </td>
                                     <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="#" class="text-yellow-500 hover:text-indigo-900 mx-2">Editar</a>
+                                        <a href="{{route('vacancies.edit',$vacancy->id)}}"
+                                           class="text-yellow-500 hover:text-indigo-900 mx-2">Editar</a>
                                         <vacancy-delete idvacancy="{{$vacancy->id}}">
                                         </vacancy-delete>
                                         <a href="{{route('vacancies.show',$vacancy->id)}}"
