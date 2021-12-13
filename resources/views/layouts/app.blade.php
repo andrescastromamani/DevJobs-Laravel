@@ -24,7 +24,7 @@
 <div id="app">
     <nav class="bg-gray-800 py-5 px-5 md:px-20">
         <div class="flex items-center">
-            <a class="text-white" href="{{ url('/') }}">
+            <a class="text-white" href="{{ url('/home') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <div class="flex-1 text-right" id="">
@@ -39,7 +39,8 @@
                            href="{{ route('register') }}">{{ __('Register') }}</a>
                     @endif
                 @else
-                    <a href="{{route('notifications')}}" class="bg-green-500 rounded-full text-center py-0 px-1 mx-2">{{\Illuminate\Support\Facades\Auth::user()->unreadNotifications->count()}}</a>
+                    <a href="{{route('notifications')}}"
+                       class="bg-green-500 rounded-full text-center py-0 px-1 mx-2">{{\Illuminate\Support\Facades\Auth::user()->unreadNotifications->count()}}</a>
                     <span class="text-gray-300 text-sm">{{ Auth::user()->name }}</span>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="no-underline text-gray-300 text-sm" href="{{ route('logout') }}"

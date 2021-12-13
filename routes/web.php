@@ -16,14 +16,9 @@ use App\Http\Controllers\NotificationController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/vacantes', [VacancyController::class, 'index'])->name('vacancies.index');
     Route::get('/vacantes/crear', [VacancyController::class, 'create'])->name('vacancies.create');
     Route::post('/vacantes', [VacancyController::class, 'store'])->name('vacancies.store');
@@ -39,6 +34,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //Notification
     Route::get('/notificaciones', NotificationController::class)->name('notifications');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/candidatos/{id}', [CandidateController::class, 'index'])->name('candidates.index');
 Route::post('/candidatos', [CandidateController::class, 'store'])->name('candidates.store');
 Route::get('/vacantes/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');
