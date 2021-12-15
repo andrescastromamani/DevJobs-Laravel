@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +37,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/notificaciones', NotificationController::class)->name('notifications');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('categorias/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('/candidatos/{id}', [CandidateController::class, 'index'])->name('candidates.index');
 Route::post('/candidatos', [CandidateController::class, 'store'])->name('candidates.store');
