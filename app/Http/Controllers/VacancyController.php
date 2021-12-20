@@ -174,4 +174,21 @@ class VacancyController extends Controller
         $vacancy->save();
         return response()->json(['correct' => 'ok']);
     }
+
+    public function search(Request $request)
+    {
+        $data = $request->validate([
+            'category' => 'required',
+            'location' => 'required'
+        ]);
+        $category = $data['category'];
+        $location = $data['location'];
+        $vacancies = Vacancy::where('category_id', $category)->where('location_id', $location)->latest()->get();
+        return view('vacancies.search', compact('vacancies'));
+    }
+
+    public function responsesearch()
+    {
+        return "desded responsesearch";
+    }
 }

@@ -14,6 +14,7 @@
                         Encuentra un trabajo remoto o en tu pais
                         <span class="block text-green-500">Para Desarrolladores y Diseñadores</span>
                     </h1>
+                    @include('ui.search')
                 </div>
                 <div class="block lg:w-1/2">
                     <img class="inset-0 h-full w-full object-cover object-center" src="{{asset('img/home.jpg')}}"

@@ -42,4 +42,7 @@ Route::get('categorias/{category}', [CategoryController::class, 'show'])->name('
 
 Route::get('/candidatos/{id}', [CandidateController::class, 'index'])->name('candidates.index');
 Route::post('/candidatos', [CandidateController::class, 'store'])->name('candidates.store');
+
+Route::post('/busqueda/search', [VacancyController::class, 'search'])->name('search.search');
+Route::get('/busqueda/search', [VacancyController::class, 'responsesearch'])->name('search.responsesearch');
 Route::get('/vacantes/{vacancy}', [VacancyController::class, 'show'])->name('vacancies.show');

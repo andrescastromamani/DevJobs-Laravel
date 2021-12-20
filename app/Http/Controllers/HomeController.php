@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         $vacancies = Vacancy::latest()->where('is_active', true)->take(10)->get();
-        return view('home', compact('vacancies'));
+
+        $locations = Location::all();
+
+        return view('home', compact('vacancies', 'locations'));
     }
 }
