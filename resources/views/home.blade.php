@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('navegation')
+    @include('ui.categoriesnav')
+@endsection
 @section('content')
     <div class="container mt-5">
         <div class="row justify-center">

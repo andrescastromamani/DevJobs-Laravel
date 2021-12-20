@@ -24,7 +24,7 @@
 <div id="app">
     <nav class="bg-gray-800 py-5 px-5 md:px-20">
         <div class="flex items-center">
-            <a class="text-white" href="{{ url('/home') }}">
+            <a class="text-white" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
             <div class="flex-1 text-right" id="">
@@ -57,7 +57,7 @@
         </div>
     </nav>
     <div class="bg-gray-700 px-5 md:px-20">
-        <nav class="flex">
+        <nav class="flex flex-col md:flex-row">
             @yield('navegation')
         </nav>
     </div>

@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/notificaciones', NotificationController::class)->name('notifications');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('categorias/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('/candidatos/{id}', [CandidateController::class, 'index'])->name('candidates.index');
